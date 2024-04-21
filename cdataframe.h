@@ -25,7 +25,11 @@ typedef struct {
 */
 CDATAFRAME *create_cdataframe();
 
-
+/**
+* @brief: Filling in the CDataframe with user input
+* @param1: Pointer to the cdataframe
+*/
+void filling_cdataframe(CDATAFRAME *cdataframe);
 
 /**
 * @brief: Hard filling of the cdataframe
@@ -34,7 +38,6 @@ CDATAFRAME *create_cdataframe();
 */
 int hard_filling_cdataframe(CDATAFRAME *cdataframe);
 
-
 // 2. Display
 /**
 * @brief: Display the entire cdataframe
@@ -42,7 +45,17 @@ int hard_filling_cdataframe(CDATAFRAME *cdataframe);
 */
 void display_cdataframe(CDATAFRAME *cdataframe);
 
+/**
+* @brief: Dispalay a part of the CDataframe rows according to a user-provided limit
+* @param1: Pointer to the cdataframe
+*/
+void display_rows_cdataframe(CDATAFRAME *cdataframe);
 
+/**
+* @brief: Display a part of the columns of the CDataframe according to a limit supplied by the user
+* @param1: Pointer to the cdataframe
+*/
+void display_columns_cdataframe(CDATAFRAME *cdataframe);
 
 // 3. Usual operations
 /**

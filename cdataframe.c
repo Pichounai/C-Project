@@ -24,7 +24,60 @@ CDATAFRAME *create_cdataframe() {
     return pointer_cdataframe;
 }
 
-
+/**
+* @brief: Filling in the CDataframe with user input
+* @param1: Pointer to the cdataframe
+*/
+void filling_cdataframe(CDATAFRAME *cdataframe) {
+    if (cdataframe->lsize != 0) {
+        printf("The CDataframe is already filled\n");
+    }
+    else {
+        int nb_columns_to_add;
+        printf("Enter the number of the columns you want to add :");
+        scanf("%d", &nb_columns_to_add);
+        printf("\n");
+        int nb_rows_to_add;
+        printf("Enter the number of the rows you want to add :");
+        scanf("%d", &nb_rows_to_add);
+        printf("\n");
+        int column_nb, row_nb;
+        for (column_nb = 0; column_nb < nb_columns_to_add; column_nb = column_nb + 1) {
+            if (column_nb == 0) {
+                add_column_cdataframe(cdataframe, "1st column");
+            }
+            else {
+                if (column_nb == 1) {
+                    add_column_cdataframe(cdataframe, "2nd column");
+                }
+                else {
+                    if (column_nb == 2) {
+                        add_column_cdataframe(cdataframe, "3rd column");
+                    }
+                    else {
+                        char column_name[12];
+                        sprintf(column_name, "%dth column", column_nb + 1);
+                        add_column_cdataframe(cdataframe, column_name);
+                    }
+                }
+            }
+            printf("%s :\n", cdataframe->columns[column_nb]->title);
+            for (row_nb = 0; row_nb < nb_rows_to_add; row_nb = row_nb + 1) {
+                int value_to_add;
+                printf("Enter a value :");
+                scanf("%d", &value_to_add);
+                if (column_nb == 0) {
+                    insert_value(cdataframe->columns[column_nb], value_to_add);
+                }
+                else {
+                    replace_value_cdataframe(cdataframe, column_nb + 1, row_nb + 1, value_to_add);
+                }
+                printf("\n");
+            }
+        }
+        printf("CDataframe is filled\n");
+    }
+}
 
 /**
 * @brief: Hard filling of the cdataframe
@@ -62,7 +115,6 @@ int hard_filling_cdataframe(CDATAFRAME *cdataframe) {
     return 1;
 }
 
-
 // 2. Display
 /**
 * @brief: Display the entire cdataframe
@@ -82,6 +134,79 @@ void display_cdataframe(CDATAFRAME *cdataframe) {
     }
 }
 
+/**
+* @brief: Dispalay a part of the CDataframe rows according to a user-provided limit
+* @param1: Pointer to the cdataframe
+*/
+void display_rows_cdataframe(CDATAFRAME *cdataframe) {
+    if (cdataframe->lsize == 0) {
+        printf("CDataframe is empty\n");
+    }
+    else {
+        int first_row_display, last_row_display;
+        printf("From witch row do you want to begin to display :");
+        scanf("%d", &first_row_display);
+        printf("\n");
+        printf("At witch row do you want to end to display :");
+        scanf("%d", &last_row_display);
+        printf("\n");
+        if (first_row_display -1 > cdataframe->columns[0]->lsize || last_row_display - 1 > cdataframe->columns[0]->lsize || first_row_display > last_row_display) {
+            printf("Not possible\n");
+        }
+        else {
+            int row_nb, column_nb;
+            for (row_nb = first_row_display - 1; row_nb < last_row_display; row_nb = row_nb + 1) {
+                printf("%d. ", row_nb + 1);
+                for (column_nb = 0; column_nb < cdataframe->lsize; column_nb = column_nb + 1) {
+                    printf("%d", cdataframe->columns[column_nb]->data[row_nb]);
+                    if (column_nb != cdataframe->lsize - 1) {
+                        printf(" ");
+                    }
+                    else {
+                        printf("\n");
+                    }
+                }
+            }
+        }
+    }
+}
+
+/**
+* @brief: Display a part of the columns of the CDataframe according to a limit supplied by the user
+* @param1: Pointer to the cdataframe
+*/
+void display_columns_cdataframe(CDATAFRAME *cdataframe) {
+    if (cdataframe->lsize == 0) {
+        printf("CDataframe is empty\n");
+    }
+    else {
+        int first_column_display, last_column_display;
+        printf("From witch column do you want to begin to display :");
+        scanf("%d", &first_column_display);
+        printf("\n");
+        printf("At witch column do you want to end to display :");
+        scanf("%d", &last_column_display);
+        printf("\n");
+        if (first_column_display -1 > cdataframe->lsize || last_column_display - 1 > cdataframe->lsize || first_column_display > last_column_display) {
+            printf("Not possible\n");
+        }
+        else {
+            int column_nb, row_nb;
+            for (column_nb = first_column_display - 1; column_nb < last_column_display; column_nb = column_nb + 1) {
+                printf("%d. %s : ", column_nb + 1, cdataframe->columns[column_nb]->title);
+                for (row_nb = 0; row_nb < cdataframe->columns[column_nb]->lsize; row_nb = row_nb + 1) {
+                    printf("%d", cdataframe->columns[column_nb]->data[row_nb]);
+                    if (row_nb != cdataframe->columns[column_nb]->lsize - 1) {
+                        printf(" ");
+                    }
+                    else {
+                        printf("\n");
+                    }
+                }
+            }
+        }
+    }
+}
 
 // 3. Usual operations
 /**

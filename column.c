@@ -139,7 +139,7 @@ int nb_values_lower(COLUMN *col, int x) {
 }
 
 /**
-* @brief: Return the number of values which are equal to x
+* @brief: Return the number of values which are equal to x (literally the same as the occurrence one)
 * @param1: Pointer to a column
 * @param2: Value to compare the others to
 * @return: The number of values that are equal to x
