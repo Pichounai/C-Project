@@ -10,6 +10,7 @@
 #include "column.h"
 #include "cdataframe.h"
 
+
 // 1. Filling
 /**
 * @brief: Create a cdataframe
@@ -22,6 +23,45 @@ CDATAFRAME *create_cdataframe() {
     pointer_cdataframe->lsize = 0;
     return pointer_cdataframe;
 }
+
+
+
+/**
+* @brief: Hard filling of the cdataframe
+* @param1: Pointer to the cdataframe
+* @return: 1 if the cdataframe as been filled 0 if the cdataframe already contained things
+*/
+int hard_filling_cdataframe(CDATAFRAME *cdataframe) {
+    if (cdataframe->psize != 0) {
+        return 0;
+    }
+    int column_nb, column_value_nb;
+    for (column_nb = 0; column_nb < REALOC_SIZE; column_nb = column_nb + 1) {
+        if (column_nb == 0) {
+            add_column_cdataframe(cdataframe, "1st column");
+        }
+        else {
+            if (column_nb == 1) {
+                add_column_cdataframe(cdataframe, "2nd column");
+            }
+            else {
+                if (column_nb == 2) {
+                    add_column_cdataframe(cdataframe, "3rd column");
+                }
+                else {
+                    char column_name[12];
+                    sprintf(column_name, "%dth column", column_nb + 1);
+                    add_column_cdataframe(cdataframe, column_name);
+                }
+            }
+        }
+        for (column_value_nb = 0; column_value_nb < REALOC_SIZE; column_value_nb = column_value_nb + 1) {
+            insert_value(cdataframe->columns[column_nb], 0);
+        }
+    }
+    return 1;
+}
+
 
 // 2. Display
 /**
@@ -44,6 +84,41 @@ void display_cdataframe(CDATAFRAME *cdataframe) {
 
 
 // 3. Usual operations
+/**
+* @brief: Add a row of values to the cdataframe
+* @param1: Pointer to the cdataframe
+* @return: 1 if the row as been added 0 otherwise
+*/
+int add_row_cdataframe(CDATAFRAME *cdataframe) {
+    if (cdataframe->lsize == 0) {
+        return 0;
+    }
+    int column_nb;
+    for (column_nb = 0; column_nb < cdataframe->lsize; column_nb = column_nb + 1) {
+        insert_value(cdataframe->columns[column_nb], 0);
+    }
+    return 1;
+}
+
+/**
+* @brief: Delete a row of values from the CDataframe
+* @param1: Pointer to the cdataframe
+* @param2: Row number to delete
+* @return: 1 if the row as been deleted 0 otherwise
+*/
+int delete_row_cdataframe(CDATAFRAME *cdataframe, int target_row_nb) {
+    if (cdataframe->lsize != 0 && cdataframe->columns[0]->lsize >= target_row_nb) {
+        int column_nb, row_nb;
+        for (column_nb = 0; column_nb < cdataframe->lsize; column_nb = column_nb + 1) {
+            for (row_nb = target_row_nb - 1; row_nb < cdataframe->columns[column_nb]->lsize - 1; row_nb = row_nb + 1) {
+                cdataframe->columns[column_nb]->data[row_nb] = cdataframe->columns[column_nb]->data[row_nb + 1];
+            }
+            cdataframe->columns[column_nb]->lsize = cdataframe->columns[column_nb]->lsize - 1;
+        }
+        return 1;
+    }
+    return 0;
+}
 
 /**
 * @brief: Add a column to the cdataframe
@@ -69,6 +144,10 @@ int add_column_cdataframe(CDATAFRAME *cdataframe, char *column_title) {
         cdataframe->psize = cdataframe->psize + REALOC_SIZE;
     }
     cdataframe->columns[cdataframe->lsize] = create_column(column_title);
+    int row_nb;
+    for (row_nb = 0; row_nb < cdataframe->columns[0]->lsize; row_nb = row_nb + 1) {
+        insert_value(cdataframe->columns[cdataframe->lsize], 0);
+    }
     cdataframe->lsize = cdataframe->lsize + 1;
     return 1;
 }
@@ -158,11 +237,11 @@ int search_value_cdataframe(CDATAFRAME *cdataframe, int value) {
 * @param2: Column number
 * @param3: Row number
 * @param4: New value
-* @return: 1 if the value as been found 0 otherwise
+* @return: 1 if the value as been replaced 0 otherwise
 */
-int replace_value_cdataframe(CDATAFRAME *cdataframe, int column_nb, int column_value_nb, int new_value) {
-    if (cdataframe->lsize >= column_nb && cdataframe->columns[column_nb]->lsize >= column_value_nb) {
-        cdataframe->columns[column_nb - 1]->data[column_value_nb - 1] = new_value;
+int replace_value_cdataframe(CDATAFRAME *cdataframe, int column_nb, int row_nb, int new_value) {
+    if (cdataframe->lsize > column_nb - 1 && cdataframe->columns[column_nb - 1]->lsize > row_nb - 1) {
+        cdataframe->columns[column_nb - 1]->data[row_nb - 1] = new_value;
         return 1;
     }
     return 0;
@@ -190,7 +269,18 @@ void column_names_cdataframe(CDATAFRAME *cdataframe) {
 }
 
 // 4. Analysis and statistics
-
+/**
+* @brief: Display the number of rows
+* @param1: Pointer to the cdataframe
+*/
+void nb_rows_cdataframe(CDATAFRAME *cdataframe) {
+    if (cdataframe->lsize == 0) {
+        printf("CDataframe is empty\n");
+    }
+    else {
+        printf("%d\n", cdataframe->columns[0]->lsize);
+    }
+}
 
 /**
 * @brief: Display the number of columns
@@ -241,8 +331,3 @@ void nb_lower_cells_cdataframe(CDATAFRAME *cdataframe, int x) {
     }
     printf("%d\n", nb_lower_cells);
 }
-
-
-
-
-

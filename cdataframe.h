@@ -26,6 +26,15 @@ typedef struct {
 CDATAFRAME *create_cdataframe();
 
 
+
+/**
+* @brief: Hard filling of the cdataframe
+* @param1: Pointer to the cdataframe
+* @return: 1 if the cdataframe as been filled 0 if the cdataframe already contained things
+*/
+int hard_filling_cdataframe(CDATAFRAME *cdataframe);
+
+
 // 2. Display
 /**
 * @brief: Display the entire cdataframe
@@ -36,7 +45,20 @@ void display_cdataframe(CDATAFRAME *cdataframe);
 
 
 // 3. Usual operations
+/**
+* @brief: Add a row of values to the cdataframe
+* @param1: Pointer to the cdataframe
+* @return: 1 if the row as been added 0 otherwise
+*/
+int add_row_cdataframe(CDATAFRAME *cdataframe);
 
+/**
+* @brief: Delete a row of values from the CDataframe
+* @param1: Pointer to the cdataframe
+* @param2: Row number to delete
+* @return: 1 if the row as been deleted 0 otherwise
+*/
+int delete_row_cdataframe(CDATAFRAME *cdataframe, int target_row_nb);
 
 /**
 * @brief: add a column to the cdataframe
@@ -77,9 +99,9 @@ int search_value_cdataframe(CDATAFRAME *cdataframe, int value);
 * @param2: Column number
 * @param3: Row number
 * @param4: New value
-* @return: 1 if the value as been found 0 otherwise
+* @return: 1 if the value as been replaced 0 otherwise
 */
-int replace_value_cdataframe(CDATAFRAME *cdataframe, int column_nb, int column_value_nb, int new_value);
+int replace_value_cdataframe(CDATAFRAME *cdataframe, int column_nb, int row_nb, int new_value);
 
 /**
 * @brief: Display column names
@@ -88,7 +110,11 @@ int replace_value_cdataframe(CDATAFRAME *cdataframe, int column_nb, int column_v
 void column_names_cdataframe(CDATAFRAME *cdataframe);
 
 // 4. Analysis and statistics
-
+/**
+* @brief: Display the number of rows
+* @param1: Pointer to the cdataframe
+*/
+void nb_rows_cdataframe(CDATAFRAME *cdataframe);
 
 /**
 * @brief: Display the number of columns
@@ -116,9 +142,6 @@ void nb_greater_cells_cdataframe(CDATAFRAME *cdataframe, int x);
 * @param2: Value to compare others to
 */
 void nb_lower_cells_cdataframe(CDATAFRAME *cdataframe, int x);
-
-
-
 
 
 #endif //C_PROJECT_CDATAFRAME_H

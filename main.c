@@ -58,16 +58,45 @@ int main() {
     CDATAFRAME *mydataframe = create_cdataframe();
 
 
+    // hard_filling_cdataframe test:
+    /**if (hard_filling_cdataframe(mydataframe) == 1) {
+        printf("CDataframe filled successfully\n");
+        printf("%d\n", mydataframe->lsize);
+    }
+    else {
+        printf("CDataframe is not empty\n");
+        printf("%d\n", mydataframe->lsize);
+    }*/
+
     // 2. Display tests:
     // display_cdataframe test:
     display_cdataframe(mydataframe);
 
+
+
     // 3. Usual operations tests:
+    // add_row_cdataframe test:
+    if (add_row_cdataframe(mydataframe) == 1) {
+        printf("Row added successfully\n");
+        display_cdataframe(mydataframe);
+    }
+    else {
+        printf("CDataframe is empty\n");
+    }
+
+    // delete_row_cdataframe test:
+    if (delete_row_cdataframe(mydataframe, 3) == 1) {
+        printf("Row deleted successfully\n");
+        display_cdataframe(mydataframe);
+    }
+    else {
+        printf("Row not found\n");
+    }
 
     // add_column_cdataframe test:
     printf("%d\n", add_column_cdataframe(mydataframe, "1st column"));
     printf("%d\n", add_column_cdataframe(mydataframe, "2nd column"));
-    printf("%s, %d\n", mydataframe->columns[1]->title, mydataframe->lsize);
+    printf("%s, %d, %d\n", mydataframe->columns[1]->title, mydataframe->lsize, mydataframe->columns[1]->lsize);
 
     // delete_column_cdataframe test:
     if (delete_column_cdataframe(mydataframe, "1st column") == 1) {
@@ -79,6 +108,7 @@ int main() {
     }
 
     // rename_column_cdataframe test:
+    printf("%s\n", mydataframe->columns[0]->title);
     if (rename_column_cdataframe(mydataframe, "2nd column", "1st column") == 1) {
         printf("Column renamed successfully\n");
         printf("%s\n", mydataframe->columns[0]->title);
@@ -88,7 +118,10 @@ int main() {
     }
 
     // search_value_cdataframe test:
-    insert_value(mydataframe->columns[0], 52);
+    add_row_cdataframe(mydataframe);
+    add_row_cdataframe(mydataframe);
+    add_row_cdataframe(mydataframe);
+    replace_value_cdataframe(mydataframe, 1, 1, 52);
     if (search_value_cdataframe(mydataframe, 52) == 1) {
         printf("Value found\n");
     }
@@ -110,25 +143,26 @@ int main() {
     add_column_cdataframe(mydataframe, "3rd column");
     column_names_cdataframe(mydataframe);
 
-    // 4. Analysis and statistics
+    // 4. Analysis and statistics tests:
+    // nb_rows_cdataframe test:
+    nb_rows_cdataframe(mydataframe);
 
     // nb_columns_cdataframe test:
     nb_columns_cdataframe(mydataframe);
 
     // nb_equal_cells_cdataframe test:
-    insert_value(mydataframe->columns[0], 52);
-    insert_value(mydataframe->columns[0], 52);
+    replace_value_cdataframe(mydataframe, 1, 2, 52);
+    replace_value_cdataframe(mydataframe, 1, 3, 52);
     add_column_cdataframe(mydataframe, "4th column");
-    insert_value(mydataframe->columns[3], 52);
+    replace_value_cdataframe(mydataframe, 4, 3, 52);
     nb_equal_cells_cdataframe(mydataframe, 52);
 
     // nb_greater_cells_cdataframe test:
-    insert_value(mydataframe->columns[1], 58);
+    replace_value_cdataframe(mydataframe, 2, 1, 58);
     nb_greater_cells_cdataframe(mydataframe, 52);
 
     // nb_lower_cells_cdataframe test:
     nb_lower_cells_cdataframe(mydataframe, 52);
-
 
 
 
