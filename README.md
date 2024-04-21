@@ -16,4 +16,4 @@ The C DataFrame Library is a C implementation designed to mimic basic functional
 
 PS: this is what we can call an Alpha, so please take into account our mistakes. We misunderstood what we were supposed to do on this first part of the project, we did all the functions.
 They are not perfect (they are even pretty bad actually), and we are going to impove it.
-Also, since we are still unsure about what solutions to use, we used the most basic ones (Columns: Inegers only -> CDataframe: Dynamic array -> Functonnalities: Basic). Those solutions might be subjects to potential changes in the future.
+Also, since we are still unsure about what solutions to use, we used the most basic ones (Columns: Inegers only -> CDataframe: Dynamic array -> functionalities: Basic). Those solutions might be subjects to potential changes in the future.
