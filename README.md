@@ -15,5 +15,5 @@ The C DataFrame Library is a C implementation designed to mimic basic functional
 - 'cdataframe.h' and 'cdataframe.c': Handle operations on the entire dataframe, such as adding/removing columns, rows, and performing data analysis.
 
 PS: this is what we can call an Alpha, so please take into account our mistakes. We misunderstood what we were supposed to do on this first part of the project, we did all the functions.
-They are not perfect (they are even pretty bad actually), and we are going to impove it.
+They are not perfect (they are even pretty bad actually), and we are going to improve it.
 Also, since we are still unsure about what solutions to use, we used the most basic ones (Columns: Integers only -> CDataframe: Dynamic array -> Functionalities: Basic). Those solutions might be subjects to potential changes in the future.
