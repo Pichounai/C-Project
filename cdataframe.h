@@ -13,8 +13,8 @@
 
 typedef struct {
     COLUMN **columns;
-    int psize;
-    int lsize;
+    int max_size;
+    int size;
 } CDATAFRAME;
 
 
@@ -74,12 +74,13 @@ int add_row_cdataframe(CDATAFRAME *cdataframe);
 int delete_row_cdataframe(CDATAFRAME *cdataframe, int target_row_nb);
 
 /**
-* @brief: add a column to the cdataframe
+* @brief: Add a column to the cdataframe
 * @param1: Pointer to the cdataframe
-* @param2: Column title
-* @return: 1 if the column is added 0 otherwise
+* @param2: Column type
+* @param3: Column title
+* @return: 1 if the column as been added 0 otherwise
 */
-int add_column_cdataframe(CDATAFRAME *cdataframe, char *column_title);
+int add_column_cdataframe(CDATAFRAME *cdataframe, ENUM_TYPE type, char *column_title);
 
 /**
 * @brief: Delete a column from the cdataframe
@@ -101,20 +102,22 @@ int rename_column_cdataframe(CDATAFRAME *cdataframe, char *former_title, char *n
 /**
 * @brief: Search if a value exist in the cdataframe
 * @param1: Pointer to the cdataframe
-* @param2: Value to search
+* @param2: Value type
+* @param3: Value to search
 * @return: 1 if the value as been found 0 otherwise
 */
-int search_value_cdataframe(CDATAFRAME *cdataframe, int value);
+int search_value_cdataframe(CDATAFRAME *cdataframe, ENUM_TYPE value_type, COL_TYPE *value);
 
 /**
 * @brief: Replace the value in the cdataframe cell using its row and column number
 * @param1: Pointer to the cdataframe
 * @param2: Column number
 * @param3: Row number
-* @param4: New value
-* @return: 1 if the value as been replaced 0 otherwise
+* @param4: New value type
+* @param5: New value
+* @return: 1 if the value as been replaced -1 if the type of the column does not correspond 0 otherwise
 */
-int replace_value_cdataframe(CDATAFRAME *cdataframe, int column_nb, int row_nb, int new_value);
+int replace_value_cdataframe(CDATAFRAME *cdataframe, int column_nb, int row_nb, ENUM_TYPE new_value_type, COL_TYPE *new_value);
 
 /**
 * @brief: Display column names
@@ -138,23 +141,26 @@ void nb_columns_cdataframe(CDATAFRAME *cdataframe);
 /**
 * @brief: Display the number of cells equal to x
 * @param1: Pointer to the cdataframe
-* @param2: Value to compare others to
+* @param2: Value type
+* @param3: Value to compare others to
 */
-void nb_equal_cells_cdataframe(CDATAFRAME *cdataframe, int x);
+void nb_equal_cells_cdataframe(CDATAFRAME *cdataframe, ENUM_TYPE x_type, COL_TYPE *x);
 
 /**
 * @brief: Display the number of cells containing a value greater than x
 * @param1: Pointer to the cdataframe
-* @param2: Value to compare others to
+* @param2: Value type
+* @param3: Value to compare others to
 */
-void nb_greater_cells_cdataframe(CDATAFRAME *cdataframe, int x);
+void nb_greater_cells_cdataframe(CDATAFRAME *cdataframe, ENUM_TYPE x_type, COL_TYPE *x);
 
 /**
 * @brief: Display the number of cells containing a value less than x
 * @param1: Pointer to the cdataframe
-* @param2: Value to compare others to
+* @param2: Value type
+* @param3: Value to compare others to
 */
-void nb_lower_cells_cdataframe(CDATAFRAME *cdataframe, int x);
+void nb_lower_cells_cdataframe(CDATAFRAME *cdataframe, ENUM_TYPE x_type, COL_TYPE *x);
 
 
 #endif //C_PROJECT_CDATAFRAME_H
