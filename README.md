@@ -14,11 +14,6 @@ To compile the project, use the following command:
 
 "gcc -o cdataframe main.c cdataframe.c column.c"
 
-# CDataframe Project
-
-## Overview
-The CDataframe project implements a simple dataframe structure in C, allowing for dynamic creation, manipulation, and analysis of tabular data.
-
 ## Files
 - cdataframe.c and cdataframe.h: Implementation and definitions for CDATAFRAME structure and functions.
 - column.c and column.h: Implementation and definitions for COLUMN structure and functions.
