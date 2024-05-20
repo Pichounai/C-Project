@@ -1,7 +1,3 @@
-//
-// Created by MAC ARTHUR on 20/04/2024.
-//
-
 #ifndef C_PROJECT_CDATAFRAME_H
 #define C_PROJECT_CDATAFRAME_H
 

@@ -1,6 +1,6 @@
-//
-// Created by MAC ARTHUR on 29/03/2024.
-//
+// Project CDataframe INT-4 Arthur DELANNOY Abderrahmane SASSY
+// Arthur DELANNOY - Abderrahmane SASSY
+// This file contains every column's functions
 
 #define REALOC_SIZE 256
 

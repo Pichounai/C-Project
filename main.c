@@ -1,6 +1,6 @@
-//
-// Created by MAC ARTHUR on 29/03/2024.
-//
+// Project CDataframe INT-4 Arthur DELANNOY Abderrahmane SASSY
+// Arthur DELANNOY - Abderrahmane SASSY
+// This is the main file, which contains tests for every function and examples of their uses
 
 #include <stdio.h>
 #include <stdlib.h>

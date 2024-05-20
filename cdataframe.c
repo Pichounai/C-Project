@@ -1,6 +1,6 @@
-//
-// Created by MAC ARTHUR on 20/04/2024.
-//
+// Project CDataframe INT-4 Arthur DELANNOY Abderrahmane SASSY
+// Arthur DELANNOY - Abderrahmane SASSY
+// This file contains every cdataframe's functions
 
 #define REALOC_SIZE 256
 
