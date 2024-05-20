@@ -23,7 +23,3 @@ Example Functions
 - Add Column: int add_column_cdataframe(CDATAFRAME *cdataframe, char *column_title)
 - Add Row: int add_row_cdataframe(CDATAFRAME *cdataframe)
 - Display Dataframe: void display_cdataframe(CDATAFRAME *cdataframe)
-
-## Components
-- 'column.h' and 'column.c': Manage individual data columns of several types, including operations like insertion, deletion, and statistics.
-- 'cdataframe.h' and 'cdataframe.c': Handle operations on the entire dataframe, such as adding/removing columns, rows, and performing data analysis.
