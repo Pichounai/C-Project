@@ -1,18 +1,16 @@
-# C DataFrame Library
+# Project CDataFrame
+
+## GitHub Link
+https://github.com/Pichounai/C-Project.git
 
 ## Overview
-The C DataFrame Library is a C implementation designed to mimic basic functionalities of Python's pandas library. It provides structures and methods for creating, manipulating, and analyzing structured data. This library is suitable for educational purposes and small-scale data manipulation tasks.
+In this project our objective was to implement a dataframe in C language with basic functionalities. We could choose from several solutions for this project. Our group chose to have all data types columns, a dynamic array CDataframe and basic functionalities.
 
 ## Features
 - Create and fill dataframes with dynamic columns and rows.
 - Display the entire dataframe or specific rows and columns.
 - Perform basic data manipulation (add/delete/rename columns and rows).
-- Basic statistical operations on the data.
-
-## Compilation
-To compile the project, use the following command:
-
-"gcc -o cdataframe main.c cdataframe.c column.c"
+- Basic operations on the data.
 
 ## Files
 - cdataframe.c and cdataframe.h: Implementation and definitions for CDATAFRAME structure and functions.
@@ -20,12 +18,6 @@ To compile the project, use the following command:
 - main.c: Demonstrates and tests the functionalities.
 
 ## Usage
-Run the compiled executable:
-
-"./cdataframe"
-
-Follow on-screen instructions to interact with the dataframe.
-
 Example Functions
 - Create Dataframe: CDATAFRAME *create_cdataframe()
 - Add Column: int add_column_cdataframe(CDATAFRAME *cdataframe, char *column_title)
@@ -33,5 +25,5 @@ Example Functions
 - Display Dataframe: void display_cdataframe(CDATAFRAME *cdataframe)
 
 ## Components
-- 'column.h' and 'column.c': Manage individual data columns, including operations like insertion, deletion, and statistics.
+- 'column.h' and 'column.c': Manage individual data columns of several types, including operations like insertion, deletion, and statistics.
 - 'cdataframe.h' and 'cdataframe.c': Handle operations on the entire dataframe, such as adding/removing columns, rows, and performing data analysis.
